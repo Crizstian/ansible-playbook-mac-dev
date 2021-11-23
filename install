@@ -2,11 +2,6 @@
 # Purpose:
 #	- bootstrap machine in order to prepare for ansible playbook run
 
-RELEASE="master"
-DOWNLOAD="https://github.com/bmacauley/ansible-playbook-mac-dev/archive/$RELEASE.tar.gz"
-
-
-
 set -e
 
 # Download and install Command Line Tools if no developer tools exist
@@ -25,91 +20,67 @@ echo 'Macbook dev tools installer'
 echo '==================================='
 echo
 echo ' Uses the following Ansible playbook...'
-echo 'https://github.com/bmacauley/ansible-playbook-mac-dev'
+echo 'https://github.com/Crizstian/ansible-playbook-mac-dev'
 echo
 echo
-
 
 if [[ $(/usr/bin/gcc 2>&1) =~ "no developer tools were found" ]] || [[ ! -x /usr/bin/gcc ]]; then
     echo "Info   | Install   | xcode"
     xcode-select --install
 fi
-
 # Download and install Homebrew
 if [[ ! -x /usr/local/bin/brew ]]; then
     echo "Info   | Install   | homebrew"
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
-
-
+# Download and install iTerm2
 if [ $(ls /Applications/ | grep iTerm.app) ]; then
     echo "Info   | Install   | iTerm2"
     brew cask install iterm2
 fi
-
-
-
-if [[ ! -x /usr/local/bin/fish ]]; then
-    echo "Info   | Install   | Fish"
-    brew install fish
-fi
-
-
-
-# Download and install Java
-if [[ $(java 2>&1) =~ "No Java runtime present" ]]; then
-    echo "Info   | Install   | Java"
-    brew cask install java
-fi
-
-
-
-
 # Download and install Python 3
 if [[ ! -x /usr/local/bin/python ]]; then
     echo "Info   | Install   | Python"
     brew install python
 fi
-
-# Download and install virtualenv
-if [[ ! -x /usr/local/bin/virtualenv ]]; then
-    echo "Info   | Install   | virtualenv"
-    pip3 install virtualenv
-fi
-
-# Download and install virtualenvwrapper
-if [[ ! -x /usr/local/bin/virtualenvwrapper.sh ]]; then
-    echo "Info   | Install   | virtualenvwrapper"
-    pip3 install virtualenvwrapper
-fi
-
 # Download and install Ansible into Python installed by Brew
 if [[ ! -x /usr/local/bin/ansible ]]; then
     echo "Info   | Install   | Ansible"
     pip3 install ansible
 fi
-
-
 # Remove old ansible-playbook-mac-dev playbook
 if [[ ! -x /tmp/ansible-playbook-mac-dev.tar.gz ]]; then
 	echo "Info   | Remove  | ansible-playbook-mac-dev playbook"
 	rm -rf /tmp/ansible-playbook-mac-dev*
 fi
-
-
 # Download and run ansible-playbook-mac-dev playbook
 echo "Info   | Download  | ansible-playbook-mac-dev playbook"
 cd /tmp
-curl -fsSL -o ansible-playbook-mac-dev.tar.gz $DOWNLOAD
-tar zxf ansible-playbook-mac-dev*.tar.gz
-
+git clone https://github.com/Crizstian/ansible-playbook-mac-dev /tmp/ansible-playbook-mac-dev
 # Modify the PATH
 # This should be subsequently updated in shell settings
 export PATH=/usr/local/bin:$PATH
-
-
 echo "Info   | Run | ansible-playbook-mac-dev playbook"
-cd /tmp/ansible-playbook-mac-dev-*
+cd /tmp/ansible-playbook-mac-dev*
 ansible-galaxy install -r requirements.yml
 ansible-playbook main.yml -i inventory -K
 
+
+## Languages runtimes not needed if development model will be by using .devcontainer strategy
+## if not uncomment section below.
+
+# Download and install Java
+# if [[ $(java 2>&1) =~ "No Java runtime present" ]]; then
+#     echo "Info   | Install   | Java"
+#     brew cask install java
+# fi
+# # Download and install virtualenv
+# if [[ ! -x /usr/local/bin/virtualenv ]]; then
+#     echo "Info   | Install   | virtualenv"
+#     pip3 install virtualenv
+# fi
+# # Download and install virtualenvwrapper
+# if [[ ! -x /usr/local/bin/virtualenvwrapper.sh ]]; then
+#     echo "Info   | Install   | virtualenvwrapper"
+#     pip3 install virtualenvwrapper
+# fi

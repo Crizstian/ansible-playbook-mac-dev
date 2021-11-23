@@ -18,8 +18,3 @@
   file:
     path: ~/.virtualenvs
     state: directory
-
-- name: Set up ~/go directory(go workspace)
-  file:
-    path: ~/go
-    state: directory

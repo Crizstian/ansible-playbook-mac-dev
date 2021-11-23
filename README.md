@@ -1,8 +1,6 @@
-# Ansible playbook for Mac setup and configuration
+# Ansible playbook for Mac setup
 
-This is playbook to install and configure software on a Macbook used for devops and cloud development.
-
-![Build status](https://travis-ci.org/bmacauley/ansible-playbook-mac-dev.svg?branch=master)
+This is playbook to install and configure software on a Macbook used for cloud native development.
 
 It is continually evolving and leans heavily on the following examples on Github:
 
@@ -19,18 +17,7 @@ Run the installer script...
 curl -fsSL https://raw.githubusercontent.com/bmacauley/ansible-playbook-mac-dev/master/install | bash
 ```
 
-The installer script installs Apple's command line tools , Homebrew, Python Pip, Ansible and finally it downloads and runs this playbook
-
-
-Alternatively...
-
-1. Install Apple's command line tools, if they are not installed (`xcode-select --install`)
-2. Install [Homebrew](http://brew.sh/)
-3. Install [Ansible](http://docs.ansible.com/ansible/intro_installation.html)
-4. Clone this playbook to your Macbook
-5. Run `$ ansible-galaxy install -r requirements.yml` inside this directory to install required Ansible roles
-6. Run `ansible-playbook main.yml -i inventory -K` inside this directory. Enter your account password when prompted.
-
+The installer script installs Apple's command line tools, Homebrew, Python Pip, Ansible and finally it downloads and runs this playbook
 
 ## Defaults
 
@@ -56,162 +43,98 @@ You can override any of the defaults configured in default.config.yml by creatin
 
 Applications (Homebrew Casks):
 
-  - [ack](http://beyondgrep.com/)
-  - [awscli](https://aws.amazon.com/cli/)
-  - [aws-shell](https://aws.amazon.com/blogs/developer/super-charge-your-aws-command-line-experience-with-aws-shell/) 
-  - autoconf
+  ### Cloud Tools ##
+  - awscli
+  - aws-sam-cli
+  - aws-shell
+  - consul
+  - docker
+  - docker-clean
+  - docker-compose
+  - heroku
+  - heroku-toolbelt
+  - minikube
+  - nomad
+  - packer
+  - packer-completion
+  - s3cmd
+  - terragrunt
+  - terraform-docs
+  - tfenv
+  - vagrant
+  - vagrant-completion
+  - vault
+  ### Git Tools ##
+  - act
+  - gist
+  - git
+  - git-crypt
+  - hub
+  - tig
+  ### Unix Tools ##
   - bash
   - bash-completion
-  - [bfg](https://github.com/rtyley/bfg-repo-cleaner)
-  - [battery](https://github.com/Goles/Battery)
-  - [cowsay](https://en.wikipedia.org/wiki/Cowsay)
-  - [ctags](http://ctags.sourceforge.net/)
-  - [curl](https://curl.haxx.se/)
-  - [docker](https://www.docker.com/)
-  - [docker-clean](https://github.com/ZZROTDesign/docker-clean)
-  - [docker-compose](https://docs.docker.com/compose/)
-  - docker-gen
-  - docker-machine
-  - [duti](https://github.com/moretension/duti)
-  - enca
-  - [fish](https://fishshell.com/)
-  - [freetds](http://www.freetds.org/)
-  - gdbm
-  - geoip
-  - gettext
-  - [git](https://git-scm.com/)
-  - [git-crypt](https://github.com/AGWA/git-crypt)
-  - git-flow
-  - [github-release](https://github.com/aktau/github-release)
-  - [git-subrepo](https://github.com/ingydotnet/git-subrepo)
-  - [gitup](http://gitup.co/)
-  - [go](https://golang.org/)
-  - [gpg](https://www.gnupg.org/)
-  - [gradle](https://gradle.org/)
-  - [hub](https://hub.github.com/)
-  - [heroku](https://www.heroku.com/)
-  - [heroku-toolbelt](https://devcenter.heroku.com/articles/heroku-cli)
-  - [htop-osx](https://hisham.hm/htop/)
-  - [httpie](https://httpie.org/)
-  - [hugo](https://gohugo.io/)
-  - [ipcalc](http://jodies.de/ipcalc)
-  - [iperf](https://iperf.fr/)
-  - [jq](https://stedolan.github.io/jq/)
-  - keychain
+  - battery
+  - brew-cask-completion
+  - bundler-completion
+  - cloc
+  - curl
+  - direnv
+  - htop-osx
+  - gpg
+  - gpg2
   - libevent
   - libffi
   - libvterm
   - libxml2
   - libyaml
-  - [macvim](http://macvim-dev.github.io/macvim/)
-  - [maven](https://maven.apache.org/)
-  - [mas](https://github.com/mas-cli/mas)
-  - [mcrypt](http://mcrypt.sourceforge.net/)
-  - md5sha1sum
-  - [mercurial](https://www.mercurial-scm.org/)
-  - [mobile-shell](https://mosh.org/)
-  - [mtr](https://en.wikipedia.org/wiki/MTR_(software))
-  - [multitail](https://www.vanheusden.com/multitail/)
-  - [mysql](https://www.mysql.com/)
-  - [nmap](https://nmap.org/)
-  - [node](https://nodejs.org/en/)
-  - [npm](https://www.npmjs.com/)
-  - [nvm](https://github.com/creationix/nvm)
-  - [nginx](https://www.nginx.com/)
-  - [mas](https://github.com/mas-cli/mas)
-  - [openssl](https://www.openssl.org/)
-  - [openvpn](https://openvpn.net/)
-  - [p7zip](http://p7zip.sourceforge.net/)
-  - [packer](https://www.packer.io/)
-  - [pandoc](http://pandoc.org/)
-  - [parallel](https://www.gnu.org/software/parallel/)
-  - [postgresql](https://www.postgresql.org/)
-  - [pup](https://github.com/grahamlyons/pup)
-  - [pv](https://linux.die.net/man/1/pv)
-  - [python](https://www.python.org/)
-  - python3
-  - [rancher-cli](http://rancher.com/)
-  - rancher-compose
-  - [rbenv](https://github.com/rbenv/rbenv)
-  - readline
-  - reattach-to-user-namespace
-  - [redis](https://redis.io/)
-  - [ruby](https://www.ruby-lang.org/en/)
-  - [s3cmd](http://s3tools.org/s3cmd)
-  - [saltstack](https://saltstack.com/)
-  - [scons](http://scons.org/)
-  - [spark](https://zachholman.com/spark/)
-  - [sqlite](https://sqlite.org/)
-  - [ssh-copy-id](https://linux.die.net/man/1/ssh-copy-id)
-  - [tccutil](https://github.com/jacobsalmela/tccutil)
-  - [terraform](https://www.terraform.io/)
-  - [terragrunt](https://github.com/gruntwork-io/terragrunt)
-  - [the_platinum_searcher](https://github.com/monochromegane/the_platinum_searcher)
-  - [the_silver_searcher](https://github.com/ggreer/the_silver_searcher)
-  - [tig](https://github.com/jonas/tig)
-  - [tmux](https://tmux.github.io/)
-  - [tree](https://www.cyberciti.biz/faq/linux-show-directory-structure-command-line/)
-  - unixodbc
-  - [vim](http://www.vim.org/)
-  - [wget](https://www.gnu.org/software/wget/)
-  - [wrk](https://github.com/wg/wrk)
-  - [zeromq](http://zeromq.org/)
-  - [zsh](https://en.wikipedia.org/wiki/Z_shell)
+  - jq
+  - nmap
+  - openssl
+  - tmux
+  - tree
+  - wget
+  - wrk
+  ### MacOS Tools ##
+  - launchctl-completion
+  - mas
+  - openvpn
+  - zsh-completions
+  - zenith
 
+  ### Development Tools ##
+  - brave-browser
+  - docker
+  - discord
+  - firefox
+  - github
+  - google-chrome
+  - gpg-suite
+  - keybase
+  - microsoft-teams
+  - postman
+  - virtualbox
+  - visual-studio-code
+  - zoom
 
-Packages(Homebrew):
-
-  - [alfred](https://www.alfredapp.com/)
-  - [amazon-workdocs](https://aws.amazon.com/workdocs/)
-  - [amazon-workspaces](https://aws.amazon.com/workspaces/)
-  - [atom](https://atom.io/)
-  - [caffeine](http://lightheadsw.com/caffeine/)
-  - [charles](https://www.charlesproxy.com/)
-  - [clipmenu](http://www.clipmenu.com/)
-  - [coconutbattery](http://www.coconut-flavour.com/coconutbattery/)
-  - [cyberduck](https://cyberduck.io/?l=en)
-  - [docker](https://www.docker.com/products/docker)
-  - [dropbox](https://www.dropbox.com/)
-  - [fantastical](https://flexibits.com/fantastical)
-  - [firefox](https://www.mozilla.org/en-GB/firefox/)
-  - [flux](https://justgetflux.com/)
-  - [gas-mask](https://github.com/2ndalpha/gasmask)
-  - [gitter](https://gitter.im/)
-  - [github-desktop](https://desktop.github.com/)
-  - [google-chrome](https://www.google.co.uk/chrome/)
-  - [google-drive](https://www.google.com/drive/)
-  - [google-hangouts](https://hangouts.google.com/)
-  - [intellij-idea](https://www.jetbrains.com/idea/)
-  - [iterm2](https://www.iterm2.com/)
-  - [istat-menus](https://bjango.com/mac/istatmenus/)
-  - [java](https://www.java.com/en/)
-  - [jump-desktop](https://jumpdesktop.com/)
-  - [joinme](https://www.join.me/)
-  - [kitematic](https://kitematic.com/)
-  - [kindle](https://www.amazon.com/Kindle-eBooks/)
-  - [limechat](http://limechat.net/mac/)
-  - [omnigraffle](https://www.omnigroup.com/omnigraffle)
-  - [pgadmin4](https://www.pgadmin.org/)
-  - [postico](https://eggerapps.at/postico/)
-  - [postman](https://www.getpostman.com/)
-  - [powershell](https://msdn.microsoft.com/en-us/powershell/)
-  - [pycharm](https://www.jetbrains.com/pycharm/)
-  - [sequel-pro](https://www.sequelpro.com/)
-  - [skitch](https://evernote.com/skitch/)
-  - [sourcetree](https://www.sourcetreeapp.com/)
-  - [slack](https://slack.com/)
-  - [sublime-text](https://www.sublimetext.com/)
-  - [tomighty](http://tomighty.org/)
-  - [transmit](https://panic.com/transmit/)
-  - [tunnelblick](https://tunnelblick.net/)
-  - [vagrant](https://www.vagrantup.com/)
-  - [virtualbox](https://www.virtualbox.org/)
-  - [visual-studio-code](https://code.visualstudio.com/)
-  - [wifi-explorer](https://www.adriangranados.com/apps/wifi-explorer)
+  ### Mac AppStore Tools ##
+  - 497799835   # Xcode
+  - 408981434   # iMovie
+  - 409183694   # keynote
+  - 1116599239  # NordVPN IKE - Unlimited VPN
+  - 1475387142  # Tailscale
+  - 1333542190  # 1Password
+  - 972572731   # MoneyPro
+  - 431748264   # PluralSight
+  - 803453959   # Slack
+  - 1147396723  # Whatsapp Desktop
+  - 1153157709  # SpeedTest
+  - 1559269364  # Notion
+  - 409201541   # Pages
+  - 462054704   # Word
+  - 462058435   # Excel
+  - 462062816   # Powerpoint
+  - 409203825   # Numbers
 
 ## Testing the Playbook
 Instructions to build a Mac OS X VirtualBox VM(geerlingguy), on which you can continually run and re-run this playbook to test changes and make sure things work correctly.
-
-Additionally, this project is continuously tested on Travis CI's macOS infrastructure.
-
-
