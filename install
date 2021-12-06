@@ -33,11 +33,11 @@ if [[ ! -x /usr/local/bin/brew ]]; then
     echo "Info   | Install   | homebrew"
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
-# Download and install iTerm2
-if [ $(ls /Applications/ | grep iTerm.app) ]; then
-    echo "Info   | Install   | iTerm2"
-    brew cask install iterm2
-fi
+# # Download and install iTerm2
+# if [ $(ls /Applications/ | grep iTerm.app) ]; then
+#     echo "Info   | Install   | iTerm2"
+#     brew cask install iterm2
+# fi
 # Download and install Python 3
 if [[ ! -x /usr/local/bin/python ]]; then
     echo "Info   | Install   | Python"

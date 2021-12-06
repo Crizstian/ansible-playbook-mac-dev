@@ -1,18 +1,18 @@
 ---
 downloads: ~/.ansible-downloads/
 
-configure_dotfiles: yes
+configure_dotfiles: no
 configure_sudoers: no
-configure_prompt: yes
-configure_python: yes
-configure_vim: yes
+configure_prompt: no
+configure_python: no
+configure_vim: no
 configure_fonts: yes
 configure_macos: yes
 mas_installed_apps: yes
 
 # Install dotfiles from a git repo
 dotfiles_repo: https://github.com/bmacauley/dotfiles.git
-dotfiles_repo_accept_hostkey: yes
+dotfiles_repo_accept_hostkey: no
 dotfiles_repo_local_destination: ~/.dotfiles
 dotfiles_files:
   - .aliases
@@ -96,6 +96,7 @@ homebrew_installed_packages:
   - openvpn
   - zsh-completions
   - zenith
+  - romkatv/powerlevel10k/powerlevel10k
 
   # - autoconf
   # - autojump
@@ -210,6 +211,7 @@ homebrew_cask_apps:
   - github
   - google-chrome
   - gpg-suite
+  - iterm2
   - keybase
   - microsoft-teams
   - postman
@@ -236,7 +238,6 @@ homebrew_cask_apps:
   # - google-hangouts
   # - handbrake
   # - intellij-idea
-  # - iterm2
   # - istat-menus
   # - java
   # - jetbrains-toolbox
